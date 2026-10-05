@@ -1,10 +1,10 @@
-# Paid, always-on judge demo. Review Render's displayed charges before creation.
+# Free-only judge demo. Never upgrade or add billing to deploy this Blueprint.
 services:
   - type: web
     name: phantom-vox-sih-2026
     runtime: docker
     region: singapore
-    plan: 1c-2g
+    plan: free
     numInstances: 1
     dockerfilePath: ./Dockerfile
     dockerContext: .
@@ -31,8 +31,7 @@ services:
 databases:
   - name: phantom-vox-db
     region: singapore
-    plan: 0.1c-256mb
-    diskSizeGB: 1
+    plan: free
     postgresMajorVersion: '17'
     databaseName: phantomvox
     ipAllowList: []
