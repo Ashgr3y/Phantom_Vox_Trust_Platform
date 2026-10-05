@@ -1,0 +1,38 @@
+# Paid, always-on judge demo. Review Render's displayed charges before creation.
+services:
+  - type: web
+    name: phantom-vox-sih-2026
+    runtime: docker
+    region: singapore
+    plan: 1c-2g
+    numInstances: 1
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PHANTOM_VOX_ENVIRONMENT
+        value: production
+      - key: PHANTOM_VOX_DATABASE_URL
+        fromDatabase:
+          name: phantom-vox-db
+          property: connectionString
+      - key: PHANTOM_VOX_JWT_SECRET
+        generateValue: true
+      - key: PHANTOM_VOX_CORS_ORIGINS
+        value: '[]'
+      - key: PHANTOM_VOX_DEMO_MODE
+        value: 'true'
+      - key: PHANTOM_VOX_SEED_DEMO_DATA
+        value: 'true'
+      - key: PHANTOM_VOX_REQUIRE_ML
+        value: 'true'
+      - key: PHANTOM_VOX_RETAIN_RAW_AUDIO
+        value: 'false'
+databases:
+  - name: phantom-vox-db
+    region: singapore
+    plan: 0.1c-256mb
+    diskSizeGB: 1
+    postgresMajorVersion: '17'
+    databaseName: phantomvox
+    ipAllowList: []

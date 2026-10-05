@@ -1,0 +1,25 @@
+services:
+  phantom-vox:
+    build:
+      context: .
+      args:
+        INSTALL_ML: "true"
+    ports:
+      - "8000:8000"
+    environment:
+      PHANTOM_VOX_ENVIRONMENT: development
+      PHANTOM_VOX_DEMO_MODE: "true"
+      PHANTOM_VOX_DATABASE_URL: sqlite:////data/phantomvox.db
+      PHANTOM_VOX_JWT_SECRET: local-compose-secret-change-before-sharing
+      PHANTOM_VOX_RETAIN_RAW_AUDIO: "false"
+      PHANTOM_VOX_REQUIRE_ML: "true"
+    volumes:
+      - phantom_vox_data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  phantom_vox_data:

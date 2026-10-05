@@ -1,0 +1,5 @@
+-r requirements-base.txt
+numpy==2.4.6
+soundfile==0.14.0
+setuptools==83.0.0
+torch==2.13.0
