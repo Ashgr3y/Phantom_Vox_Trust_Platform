@@ -2,7 +2,7 @@
 
 ## Current status
 
-The deployment copy is prepared and tested locally and published at https://github.com/Ashgr3y/Phantom_Vox_Trust_Platform. A Free-only Render Blueprint has been submitted without adding a payment method. Cloud build, inference, HTTPS flow and persistence checks are still pending; do not put an unverified URL in the PPT.
+Public HTTPS URL: https://phantom-vox-sih-2026.onrender.com. Render Free Docker web service and Free managed PostgreSQL were created without a card or paid resources. The Linux container startup, required RawNetLite forward pass, website/login/dashboard/WebSockets/prevention/audio inference/audit all passed. GitHub Actions cloud runner evidence: https://github.com/Ashgr3y/Phantom_Vox_Trust_Platform/actions/runs/37347600586. Browser upload displayed RawNetLite evidence score 16. A Render service restart was confirmed in Events; the same session, ON HOLD transaction, FAILED verification, incident and audit chronology survived, and Model Trust still showed RawNetLite READY / Loaded. Refresh an already-open Live Guard tab after a service restart to reconnect its WebSocket. Judging is October 31, 2026; database expiry displayed by Render is November 4, 2026.
 
 The original Desktop project was left unchanged. This deployment directory is the root of the public GitHub repository, including the bundled model checkpoint. `.venv`, `node_modules`, `dist`, databases, `.env` files, generated test audio, logs and screenshots are excluded. Hosting and database credentials are not committed.
 
@@ -18,7 +18,7 @@ The original Desktop project was left unchanged. This deployment directory is th
 
 ## Provider and configuration
 
-Use the included `render.yaml` Blueprint: Singapore, one Free Docker web service and Free managed PostgreSQL. Never add a payment method, upgrade a plan or create a paid resource for this deployment. The Free web service sleeps after 15 idle minutes and has 512 MB RAM; actual ML memory behavior must be verified in the cloud. The Free database expires after 30 days and has no backups. Render assigns the actual HTTPS URL; the service name does not guarantee an identical hostname.
+Use the included `render.yaml` Blueprint: Singapore, one Free Docker web service and Free managed PostgreSQL. Never add a payment method, upgrade a plan or create a paid resource for this deployment. The Free web service sleeps after 15 idle minutes and has 512 MB RAM; startup and a three-second audio inference passed on this plan. The Free database expires after 30 days and has no backups. Render assigns the actual HTTPS URL; the service name does not guarantee an identical hostname.
 
 Environment variables configured by the Blueprint:
 
@@ -65,13 +65,13 @@ These are the existing intentionally public, prefilled fictional-demo credential
 - HTTP smoke test against the built single-service app passed website, SPA deep link, login, dashboard, WebSocket updates, demo hold/failed verification/incident, real audio inference and audit.
 - Browser sign-in, dashboard, live WebSocket scenario and audio upload verified. Browser displayed critical risk, ON HOLD, FAILED verification, created incident and RawNetLite evidence score 16 for the generated test waveform.
 - Test waveform score was 0.1605. A synthetic tone checks execution, not speech-detector accuracy. Consented genuine/cloned speech samples must also be tested before presentation.
-- Docker is unavailable on this machine, so the actual Linux container build and PostgreSQL end-to-end behavior await cloud deployment. Local tests use temporary SQLite.
+- Cloud Linux Docker build and PostgreSQL end-to-end checks passed on Render Free. The GitHub Ubuntu runner verified the public HTTPS flow and actual inference. Browser login, live scenario and WAV upload also passed. Long uploads and concurrent inference have not been load-tested on 512 MB Free compute.
 
 ## Files changed from the original
 
 `Dockerfile`, `docker-compose.yml`, `.dockerignore`, `.gitignore`, `.env.example`, `QUICK_START.md`, `backend/app/core/config.py`, `backend/app/main.py`, `backend/app/api/router.py`, `backend/app/inference/rawnetlite.py`, `backend/tests/conftest.py`.
 
-Added: `render.yaml`, `backend/app/serve.py`, `backend/tests/test_deployment.py`, `scripts/check_deployment.py`, `docs/DEPLOYMENT.md`.
+Added: `render.yaml`, `backend/app/serve.py`, `backend/tests/test_deployment.py`, `scripts/check_deployment.py`, `docs/DEPLOYMENT.md`, `.github/workflows/demo-cloud-check.yml`.
 
 The React UI, model architecture, checkpoint, pinned dependencies, and existing business workflows remain unchanged.
 
@@ -89,4 +89,6 @@ Before adding the URL to the PPT:
 6. Insert a clickable HTTPS link (and optionally a QR code) into the PPT. Never insert localhost or any URL containing an authentication token.
 
 Provider references: https://render.com/docs/blueprint-spec, https://render.com/docs/docker, https://render.com/docs/web-services, https://render.com/docs/postgresql-creating-connecting.
+
+
 
