@@ -2,9 +2,9 @@
 
 ## Current status
 
-The deployment copy is prepared and tested locally. No public deployment or HTTPS URL has been created yet. Cloud Docker build, managed PostgreSQL behavior, restart persistence, and cloud inference must be verified after account sign-in. Do not put the local URL in the PPT.
+The deployment copy is prepared and tested locally and published at https://github.com/Ashgr3y/Phantom_Vox_Trust_Platform. A Free-only Render Blueprint has been submitted without adding a payment method. Cloud build, inference, HTTPS flow and persistence checks are still pending; do not put an unverified URL in the PPT.
 
-The original Desktop project was left unchanged. Deploy this project directory as the root of a private GitHub repository, including the bundled model checkpoint. Exclude `.venv`, `node_modules`, `dist`, databases, `.env` files, generated test audio, logs, and screenshots. The parent workspace has an empty Git repository; there is no supplied GitHub remote.
+The original Desktop project was left unchanged. This deployment directory is the root of the public GitHub repository, including the bundled model checkpoint. `.venv`, `node_modules`, `dist`, databases, `.env` files, generated test audio, logs and screenshots are excluded. Hosting and database credentials are not committed.
 
 ## Architecture inspected
 
@@ -18,7 +18,7 @@ The original Desktop project was left unchanged. Deploy this project directory a
 
 ## Provider and configuration
 
-Use the included `render.yaml` Blueprint: Singapore, one Docker web service (`1c-2g`, 2 GB), and managed PostgreSQL (`0.1c-256mb`, 1 GB disk). These are paid resources; review the live cost summary and approve the charges before creation. The selected plans avoid the free web-service sleep cycle and give CPU inference more memory. Render assigns the actual stable HTTPS URL; the desired service name is not a guarantee that an identical hostname is available.
+Use the included `render.yaml` Blueprint: Singapore, one Free Docker web service and Free managed PostgreSQL. Never add a payment method, upgrade a plan or create a paid resource for this deployment. The Free web service sleeps after 15 idle minutes and has 512 MB RAM; actual ML memory behavior must be verified in the cloud. The Free database expires after 30 days and has no backups. Render assigns the actual HTTPS URL; the service name does not guarantee an identical hostname.
 
 Environment variables configured by the Blueprint:
 
@@ -42,12 +42,12 @@ The managed database is restricted to internal connections (`ipAllowList: []`). 
 ## Account sign-in and deploy steps
 
 1. Sign in to GitHub and Render in the Codex browser; complete OAuth/MFA yourself. Never provide account passwords, access tokens or database passwords in chat.
-2. Create or select a private GitHub repository and publish this prepared directory at its root. If publishing the enclosing SIH_1 repository, set the Blueprint path to `Phantom_Vox_Trust_Platform/render.yaml` and the service root directory to `Phantom_Vox_Trust_Platform` instead.
+2. Use https://github.com/Ashgr3y/Phantom_Vox_Trust_Platform with this prepared directory at its root. If publishing the enclosing SIH_1 repository, set the Blueprint path to `Phantom_Vox_Trust_Platform/render.yaml` and the service root directory to `Phantom_Vox_Trust_Platform` instead.
 3. In Render choose **New > Blueprint**, connect that repository, and select the included YAML. Grant repository access only as needed.
-4. Review the service/database plans and live charge summary, then approve resource creation.
+4. Confirm BOTH plans are Free. If Render requests billing, stop; do not add a card or create paid resources.
 5. Wait for both resources and the Docker build to succeed. Review startup logs for successful application startup. A model or database failure must be fixed before accepting the deployment.
 6. Open the service's assigned HTTPS URL, confirm health, and test login/dashboard/Live Guard/upload/Model Trust/Privacy & Audit.
-7. Run `python scripts/check_deployment.py https://YOUR-ASSIGNED-HOST` from a cloud shell or Render shell with the script available. It checks HTML/deep links, login, dashboard, authenticated WebSocket delivery, transaction hold/verification/incident, actual ML upload, and audit integrity. It creates fictional test metadata. It never prints authentication tokens.
+7. Run `python scripts/check_deployment.py https://YOUR-ASSIGNED-HOST` from a cloud runner with the script and dependencies available (Free Render does not provide a shell). It checks HTML/deep links, login, dashboard, authenticated WebSocket delivery, transaction hold/verification/incident, actual ML upload, and audit integrity. It creates fictional test metadata. It never prints authentication tokens.
 8. Restart the service and verify the recorded session/incident still exists. Repeat a real audio upload and confirm model status is active.
 
 ## Dedicated demo account
@@ -85,7 +85,8 @@ Before adding the URL to the PPT:
 2. Pass the cloud smoke check, browser upload check with your consented speech samples, and persistence-after-restart check.
 3. Open that HTTPS URL in a signed-out/incognito browser and on a phone using mobile data.
 4. Confirm the prefilled demo login, dashboard, **Mid-call clone** workflow, displayed upload score, **Model Trust** loaded status and **Verify audit integrity** action.
-5. Keep the paid service and database active through judging. Test again shortly before the presentation and retain an offline screen recording as backup.
+5. Confirm the Free database expiry is AFTER judging. Open the website several minutes before presenting to wake the Free service, then test login and upload again. Retain an offline screen recording as backup.
 6. Insert a clickable HTTPS link (and optionally a QR code) into the PPT. Never insert localhost or any URL containing an authentication token.
 
 Provider references: https://render.com/docs/blueprint-spec, https://render.com/docs/docker, https://render.com/docs/web-services, https://render.com/docs/postgresql-creating-connecting.
+
